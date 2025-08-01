@@ -23,8 +23,19 @@ CREATE TABLE Usuario (
 --Crear la tabla para registrar cada venta
 CREATE TABLE Venta (
     id_venta INT PRIMARY KEY AUTO_INCREMENT,
-    id_usuario INT, -- Clave Foránea: el usuario que realizó la venta
+    id_usuario INT,
     fecha_venta DATETIME NOT NULL,
     total_venta DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+--  Se crear la tabla que conecta los productos con las ventas
+CREATE TABLE DetalleVenta (
+    id_detalle_venta INT PRIMARY KEY AUTO_INCREMENT,
+    id_venta INT, 
+    id_producto INT, 
+    cantidad INT NOT NULL,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_venta) REFERENCES Venta(id_venta),
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );
