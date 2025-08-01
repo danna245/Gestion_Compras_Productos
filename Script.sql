@@ -12,3 +12,19 @@ CREATE TABLE Producto (
     precio DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL
 );
+
+--Crear la tabla para los usuarios del sistema (para el login)
+CREATE TABLE Usuario (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL
+);
+
+--Crear la tabla para registrar cada venta
+CREATE TABLE Venta (
+    id_venta INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT, -- Clave Foránea: el usuario que realizó la venta
+    fecha_venta DATETIME NOT NULL,
+    total_venta DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
